@@ -1,0 +1,18 @@
+<h1>Editing Book</h1>
+<%= form_for(@book) do |f| %>
+	<% if @book.errors.any? %>
+		<h3 class="message-error"><%= @book.errors.count %> errors prohibited this book from being saved:</h3>
+		<ul>
+		<% @book.errors.full_messages.each do |message| %>
+			<li><%= message %></li>
+		<% end %>
+		</ul>
+	<% end %>
+		<h2>Title</h2>
+		<%= f.text_field :title %>
+		<h2>Body</h2>
+		<%= f.text_area :opinion %>
+		<%= f.submit 'Update Book' %>
+		<%= link_to "Show", book_path(@book.id) %>
+		<%= link_to "Back", books_path %>
+<% end %>
