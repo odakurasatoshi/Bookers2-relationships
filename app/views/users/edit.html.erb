@@ -1,0 +1,11 @@
+<%= form_for(@user) do |f| %>
+		<h2>name</h2>
+		<%= f.text_field :name %>
+		<h2>introduction</h2>
+		<%= f.text_field :introduction %>
+		<%= attachment_image_tag @user, :profile_image, :fill, 60, 60, class: "img-circle pull-left profile-thumb", fallback: "no_image.jpg"%>
+	    <%= f.attachment_field :profile_image, placeholder: "プロフィール画像", class: "user-edit-form" %>
+		<%= f.submit 'Update Book' %>
+		<%= link_to "Show", user_path(@user.id) %>
+		<%= link_to "Back", users_path %>
+<% end %>

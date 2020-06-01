@@ -10,6 +10,25 @@
   </head>
 
   <body>
+              <% if user_signed_in? %>
+                <li class="">
+                  <%= link_to "ログアウト",destroy_user_session_path, method: :delete %>
+                </li>
+                <li class="">
+                  <%= link_to "投稿フォーム",books_path %>
+                </li>
+                <li class="">
+                <!-- ↓以下コードは、５章で正しいroutingに書き直します -->
+                  <%= link_to'マイページ',users_path %>
+                </li>
+              <% else %>
+                <li class="">
+                  <%= link_to "新規登録",new_user_registration_path %>
+                </li>
+                <li class="">
+                <%= link_to "ログイン",new_user_session_path %>
+                </li>
+              <% end %>
     <%= yield %>
   </body>
 </html>
