@@ -1,4 +1,12 @@
 <%= form_for(@user) do |f| %>
+	<% if @user.errors.any? %>
+		<h3 class="message-error"><%= @user.errors.count %> errors prohibited this user from being saved:</h3>
+		<ul>
+		<% @user.errors.full_messages.each do |message| %>
+			<li><%= message %></li>
+		<% end %>
+		</ul>
+	<% end %>
 		<h2>name</h2>
 		<%= f.text_field :name %>
 		<h2>introduction</h2>
