@@ -1,19 +1,31 @@
 <%= flash[:notice] %>
-
-<h1>Users</h1>
-	<table>
-		<tbody>
-		<% @users.each do |user| %>
-			<tr>
-			<td><%= attachment_image_tag user, :profile_image, :fill, 40, 40, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %></td>
-			<td><%= user.name %></td>
-      		<td>
-      		<%= link_to "show", user_path(user.id) %>
-      		</td>
-      		</tr>
-    	<% end %>
-		</tbody>
-	</table>
+<div class="container">
+	<h1>User info</h1>
+		<%= attachment_image_tag @user, :profile_image, :fill, 80, 80, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
+		<h4>name</h4>
+			<p><%= @user.name %></p>
+		<h4>introduction</h4>
+			<p><%= @user.introduction %></p>
+		<% if @user == current_user %>
+			<%= link_to "edit", edit_user_path(@user.id) %>
+		<% end %>
+</div>
+<div class="container">
+	<h1>Users</h1>
+		<table class="table table-striped">
+			<tbody>
+			<% @users.each do |user| %>
+				<tr>
+				<td><%= attachment_image_tag user, :profile_image, :fill, 80, 80, format: 'jpeg', class: "", fallback: "no_image.jpg" %></td>
+				<td><%= user.name %></td>
+	      		<td>
+	      		<%= link_to "show", user_path(user.id) %>
+	      		</td>
+	      		</tr>
+	    	<% end %>
+			</tbody>
+		</table>
+</div>
 
 <h1>New book</h1>
 	<%= form_for(@book) do |f| %>
