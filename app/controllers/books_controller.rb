@@ -7,16 +7,22 @@ before_action :authenticate_user!, except: [:top, :about]
 	end
 
 	def index
-		@books = Book.all.order(created_at: :desc)
+		@books = Book.all
 		@book = Book.new
+		@user = current_user
 	end
 
 	def show
 		@book =Book.find(params[:id])
+		@book1 = Book.new
+		@user = User.find(@book.user_id)
 	end
 
 	def edit
 		@book = Book.find(params[:id])
+		if @book.user_id != current_user.id
+		   redirect_to books_path
+		end
 	end
 
 	def update
@@ -44,6 +50,7 @@ before_action :authenticate_user!, except: [:top, :about]
 		   flash[:notice] = "Book was successfully created."
 		   redirect_to book_path(@book.id)
 		else
+		   @user = User.find(current_user.id)
 		   @books = Book.all
 		   render action: :index
 		end

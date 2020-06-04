@@ -1,0 +1,9 @@
+			<h1>User info</h1>
+				<%= attachment_image_tag user, :profile_image, :fill, 80, 80, format: 'jpeg', class: "", fallback: "no_image.jpg" %>
+				<h4>name</h4>
+					<p><%= @user.name %></p>
+				<h4>introduction</h4>
+					<p><%= user.introduction %></p>
+				
+					<%= link_to "", edit_user_path(user), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench"%>
+			

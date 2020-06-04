@@ -8,10 +8,13 @@ class UsersController < ApplicationController
 
   def show
   	@user = User.find(params[:id])
-    # @books = @user.books.all
   end
 
   def edit
+    @user = User.find(params[:id])
+    if @user.id != current_user.id
+       redirect_to user_path(current_user)
+    end
   end
 
   def update
@@ -22,6 +25,10 @@ class UsersController < ApplicationController
        @users = User.all
        render action: :edit
     end
+  end
+
+  def destory
+      flash[:notice] = "Signed out successfully."
   end
 
   protected
