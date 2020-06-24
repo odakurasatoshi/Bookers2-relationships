@@ -4,6 +4,5 @@
 					<p><%= @user.name %></p>
 				<h4>introduction</h4>
 					<p><%= user.introduction %></p>
-				
 					<%= link_to "", edit_user_path(user), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench"%>
-			
+				<%= render 'relationships/follow_button', user: user %>

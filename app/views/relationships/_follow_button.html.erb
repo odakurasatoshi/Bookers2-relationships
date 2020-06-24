@@ -1,0 +1,21 @@
+<%= link_to user_following_path(user.id) do %>
+<p><%= "フォロー数: #{user.followings.count}" %></p>
+<% end %>
+
+<!-- <%= link_to "users/#{user.id}/follower"  %> rails routesの真ん中部分を書いてリンク先を指定している-->
+<%= link_to user_follower_path(user_id: user.id) do %>
+<p><%= "フォロワー数: #{user.followers.count}" %></p>
+<% end %>
+<% unless current_user == user %>
+  <% if current_user.following?(user) %>
+    <%= form_for(current_user.relationships.find_by(follow_id: user.id), url: user_relationship_path(user.id,current_user.relationships.find_by(follow_id: user.id).id),html: { method: :delete }) do |f| %>
+      <%= hidden_field_tag :follow_id, user.id %>
+      <%= f.submit 'Unfollow', class: 'btn btn-danger btn-block' %>
+    <% end %>
+  <% else %>
+    <%= form_for(current_user.relationships.build, url: user_relationships_path(user.id), method: :post) do |f| %>
+      <%= hidden_field_tag :follow_id, user.id %>
+      <%= f.submit 'Follow', class: 'btn btn-primary btn-block' %>
+    <% end %>
+  <% end %>
+<% end %>
